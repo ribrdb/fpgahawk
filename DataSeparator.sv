@@ -101,5 +101,4 @@ module DataSeparator
       endcase
    end
 
-
 endmodule

@@ -65,6 +65,8 @@ assign sect_stb = sect_stb1 ^ sect_stb2;
 assign new_read_addr = new_read_addr1 ^ new_read_addr2;
 assign new_read_data = new_read_data1 ^ new_read_data2;
 assign addr_pat = cur_addr[14:8] ^ cur_addr[7:0];
+assign hawk_wr_en = (state == WRITE_GAP || state == WRITE);
+assign hawk_read_en = (state == READ_ADDR || state == READ);
 
 always @(posedge hawk_sector) sect_stb0 <= ~sect_stb0;
 

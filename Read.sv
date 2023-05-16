@@ -14,7 +14,7 @@ module Read (
 );
 
 localparam ADDR_GAP = 0, ADDR = 1, DATA_GAP = 2, DATA = 3, END_GAP = 4;
-localparam ADDR_GAP_MAX = 207, ADDR_MAX = 31, DATA_GAP_MAX=207, DATA_MAX=408; 
+localparam ADDR_GAP_MAX = 207, ADDR_MAX = 31, DATA_GAP_MAX=207, DATA_MAX=408*8; 
 
 reg[8:0] counter = 0;
 reg[2:0] state = 0, next_state=0;
@@ -38,7 +38,7 @@ always_comb begin : counter_reset_logic
         DATA_GAP:
             reset_counter = counter == DATA_GAP_MAX;
         DATA:
-            reset_counter = counter == DATA_GAP_MAX;
+            reset_counter = counter == DATA_MAX;
         default:
             reset_counter = 0;
     endcase
@@ -64,6 +64,7 @@ always_comb begin : next_state_logic
 end
 
 always_ff @ (posedge clk) counter <= reset_counter ? 0 : counter + 1;
+always_ff @ (posedge clk) state <= next_state;
 
 always_ff @ (posedge clk) 
 if (state == DATA)
@@ -85,8 +86,12 @@ else
 
 always_ff @ (posedge clk)
 case (state)
+    ADDR_GAP:
+    data_out <= counter == ADDR_GAP_MAX;
     ADDR:
     data_out <= addr_shift_reg[0];
+    DATA_GAP:
+    data_out <= counter == DATA_GAP_MAX;
     DATA:
     data_out <= data_shift_reg[7];
     default:

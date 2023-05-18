@@ -50,7 +50,7 @@ always @(posedge clk) begin
         cache_wr <= 0;
     end else begin
         cache_wr <= byte_available;
-        cache_addr <= (ready_for_next_byte | byte_available) ? cache_addr + 1 : cache_addr;
+        cache_addr <= (ready_for_next_byte | byte_available) ? cache_addr + 1'b1 : cache_addr;
     end
 end
 

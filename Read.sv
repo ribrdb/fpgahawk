@@ -13,10 +13,10 @@ module Read (
     output reg prefetch
 );
 
-localparam ADDR_GAP = 0, ADDR = 1, DATA_GAP = 2, DATA = 3, END_GAP = 4;
-localparam ADDR_GAP_MAX = 207, ADDR_MAX = 31, DATA_GAP_MAX=207, DATA_MAX=408*8; 
+localparam ADDR_GAP = 3'd0, ADDR = 3'd1, DATA_GAP = 3'd2, DATA = 3'd3, END_GAP = 3'd4;
+localparam ADDR_GAP_MAX = 12'd207, ADDR_MAX = 12'd31, DATA_GAP_MAX=12'd207, DATA_MAX=12'd3264 /* 408*8) */; 
 
-reg[8:0] counter = 0;
+reg[11:0] counter = 0;
 reg[2:0] state = 0, next_state=0;
 logic reset_counter;
 reg[7:0] data_shift_reg;
@@ -63,12 +63,12 @@ always_comb begin : next_state_logic
     else next_state = state;
 end
 
-always_ff @ (posedge clk) counter <= reset_counter ? 0 : counter + 1;
+always_ff @ (posedge clk) counter <= reset_counter ? 12'b0 : counter + 1'b1;
 always_ff @ (posedge clk) state <= next_state;
 
 always_ff @ (posedge clk) 
 if (state == DATA)
-    addr_out <= counter[2:0] == 0 ? addr_out + 1 : addr_out;
+    addr_out <= counter[2:0] == 0 ? addr_out + 1'b1 : addr_out;
 else
     addr_out <= 0;
 

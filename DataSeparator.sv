@@ -73,7 +73,7 @@ module DataSeparator
            next_data <= 0;
         end
         DATA_PULSE: begin
-           counter <= counter + 1;
+           counter <= counter + 1'b1;
            wr_clock <= 0;
            wr_data <= 0;
            next_data <= 1;
@@ -92,7 +92,7 @@ module DataSeparator
         end
 
         default: begin
-           counter <= counter + 1;
+           counter <= counter + 1'b1;
            next_data <= next_data;
            wr_clock <= 0;
            wr_data <= 0;

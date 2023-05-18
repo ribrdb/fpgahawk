@@ -1,5 +1,5 @@
 module Hawk #(
-    parameter DENSITY = 1 // not really sure if this should be 0 or 1
+    parameter DENSITY = 1'b1 // not really sure if this should be 0 or 1
 ) (
     input wire clk,
     input wire sd_clk, // 25 MHz
@@ -37,6 +37,8 @@ module Hawk #(
     output wire sd_sclk
 );
 
+logic select_reg;
+logic reading;
 logic on_cyl;
 logic rd_data;
 logic rd_clock;
@@ -46,12 +48,9 @@ logic seek_err;
 logic adint;
 logic fault;
 logic ready;
-logic [4:0] saddr;
 logic addr_ack;
 logic density;
 
-logic cyl_strobe;
-logic rtzs;
 logic wr_en;
 logic read_en;
 
@@ -76,29 +75,32 @@ logic sep_data;
 logic new_data;
 logic [8:0] write_addr_out;
 
-assign o_on_cyl = unit_select ? on_cyl : 1'bZ;
-assign o_rd_data = unit_select ? (read_en & rd_data) : 1'bZ;
-assign o_rd_clock = unit_select ? (read_en & data_clk) : 1'bZ;
-assign o_index = unit_select ? (index & o_on_cyl) : 1'bZ;
-assign o_sector = unit_select ? (sector & o_on_cyl) : 1'bZ;
-assign o_seek_err = unit_select ? seek_err : 1'bZ;
-assign o_adint = unit_select ? adint : 1'bZ;
-assign o_fault = unit_select ? fault : 1'bZ;
-assign o_ready = unit_select ? ready : 1'bZ;
-assign o_wrstat = unit_select ? 1'b0 : 1'bZ;
-assign o_saddr = unit_select ? saddr : 5'bZZZZZ;
-assign o_addr_ack = unit_select ? addr_ack : 1'bZ;
-assign o_density = unit_select ? DENSITY : 1'bZ;  
+assign o_on_cyl = select_reg ? on_cyl : 1'bZ;
+assign o_rd_data = reading ? rd_data : 1'bZ;
+assign o_rd_clock = reading ? data_clk : 1'bZ;
+assign o_index = select_reg ? index : 1'bZ;
+assign o_sector = select_reg ? sector : 1'bZ;
+assign o_seek_err = select_reg ? seek_err : 1'bZ;
+assign o_adint = select_reg ? adint : 1'bZ;
+assign o_fault = select_reg ? fault : 1'bZ;
+assign o_ready = select_reg ? ready : 1'bZ;
+assign o_wrstat = select_reg ? 1'b0 : 1'bZ;
+assign o_saddr = select_reg ? sector_addr : 5'bZZZZZ;
+assign o_addr_ack = select_reg ? addr_ack : 1'bZ;
+assign o_density = select_reg ? DENSITY : 1'bZ;  
 
-assign cyl_strobe = unit_select ? i_cyl_strobe : 0;
-assign rtzs = unit_select ? i_rtzs : 0;
-assign wr_en = unit_select ? i_wr_en : 0;
-assign read_en = unit_select ? i_read_en : 0;
+assign wr_en = i_wr_en & unit_select;
+assign read_en = i_read_en & unit_select;
 
 assign interrupt = seek_err | adint | on_cyl;
 assign fault = sd_error;
 
 assign hawk_cache_addr = wr_en ? write_addr_out : read_addr_out;
+
+always_ff @(negedge clk) select_reg <= unit_select;
+always_ff @(negedge clk) reading <= read_en;
+
+always_ff @(posedge clk) ready <= ready ? 1'b1 : (sd_ready && on_cyl);
 
 SingleSectorCache cache0(
     .clk_a(clk),
@@ -138,9 +140,10 @@ SdCache sd0 (
 
 SeekController #(.MIN_SEEK_CYCLES(1000), .ACK_CYCLES(90)) seek0(
     .clk(clk),
-    .cyl_strobe(cyl_strobe),
+    .en(unit_select),
+    .cyl_strobe(i_cyl_strobe),
     .cyl_addr_in(cylad),
-    .rtzs(rtzs),
+    .rtzs(i_rtzs),
     .cyl_addr_out(seek_cyl),
     .error(seek_err),
     .invalid_addr(adint),
@@ -149,8 +152,8 @@ SeekController #(.MIN_SEEK_CYCLES(1000), .ACK_CYCLES(90)) seek0(
 );
 
 SectorCount sector0(
-    .clk25(data_clk),
-    .reset(rtzs),
+    .clk2_5(data_clk),
+    .en(on_cyl && sd_ready),
     .index_strobe(index),
     .sector_strobe(sector),
     .sector(sector_addr)

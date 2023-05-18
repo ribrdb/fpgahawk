@@ -17,7 +17,7 @@ reg need_flush = 0;
 always_ff @ (posedge clk) begin
     wr_en <= &counter[2:0];
     if (data_area) begin
-        counter <= new_data ? counter + 1 : counter;
+        counter <= new_data ? counter + 1'b1 : counter;
         need_flush <= 1;
         wr_flush <= 0;
     end else begin

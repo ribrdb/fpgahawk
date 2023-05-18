@@ -1,0 +1,126 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 272 304)
+	(text "clocks" (rect 118 -1 142 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 288 20 300)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "clk_clk" (rect 0 0 27 12)(font "Arial" (font_size 8)))
+		(text "clk_clk" (rect 4 61 46 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 80 72)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "reset_reset_n" (rect 0 0 56 12)(font "Arial" (font_size 8)))
+		(text "reset_reset_n" (rect 4 101 82 112)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 80 112)(line_width 1))
+	)
+	(port
+		(pt 272 72)
+		(output)
+		(text "pll_0_clk_100_clk" (rect 0 0 69 12)(font "Arial" (font_size 8)))
+		(text "pll_0_clk_100_clk" (rect 184 61 286 72)(font "Arial" (font_size 8)))
+		(line (pt 272 72)(pt 160 72)(line_width 1))
+	)
+	(port
+		(pt 272 112)
+		(output)
+		(text "pll_0_clk_25_clk" (rect 0 0 66 12)(font "Arial" (font_size 8)))
+		(text "pll_0_clk_25_clk" (rect 188 101 284 112)(font "Arial" (font_size 8)))
+		(line (pt 272 112)(pt 160 112)(line_width 1))
+	)
+	(port
+		(pt 272 152)
+		(output)
+		(text "pll_0_clk_2_5_clk" (rect 0 0 71 12)(font "Arial" (font_size 8)))
+		(text "pll_0_clk_2_5_clk" (rect 181 141 283 152)(font "Arial" (font_size 8)))
+		(line (pt 272 152)(pt 160 152)(line_width 1))
+	)
+	(port
+		(pt 272 192)
+		(output)
+		(text "pll_0_locked_export" (rect 0 0 79 12)(font "Arial" (font_size 8)))
+		(text "pll_0_locked_export" (rect 171 181 285 192)(font "Arial" (font_size 8)))
+		(line (pt 272 192)(pt 160 192)(line_width 1))
+	)
+	(port
+		(pt 272 232)
+		(output)
+		(text "pll_1_locked_export" (rect 0 0 77 12)(font "Arial" (font_size 8)))
+		(text "pll_1_locked_export" (rect 173 221 287 232)(font "Arial" (font_size 8)))
+		(line (pt 272 232)(pt 160 232)(line_width 1))
+	)
+	(port
+		(pt 272 272)
+		(output)
+		(text "pll_1_outclk0_clk" (rect 0 0 66 12)(font "Arial" (font_size 8)))
+		(text "pll_1_outclk0_clk" (rect 188 261 290 272)(font "Arial" (font_size 8)))
+		(line (pt 272 272)(pt 160 272)(line_width 1))
+	)
+	(drawing
+		(text "clk" (rect 65 43 148 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 85 67 188 144)(font "Arial" (color 0 0 0)))
+		(text "pll_0_clk_100" (rect 161 43 400 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 145 67 308 144)(font "Arial" (color 0 0 0)))
+		(text "pll_0_clk_25" (rect 161 83 394 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 145 107 308 224)(font "Arial" (color 0 0 0)))
+		(text "pll_0_clk_2_5" (rect 161 123 400 259)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 145 147 308 304)(font "Arial" (color 0 0 0)))
+		(text "pll_0_locked" (rect 161 163 394 339)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "export" (rect 130 187 296 384)(font "Arial" (color 0 0 0)))
+		(text "pll_1_locked" (rect 161 203 394 419)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "export" (rect 130 227 296 464)(font "Arial" (color 0 0 0)))
+		(text "pll_1_outclk0" (rect 161 243 400 499)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 145 267 308 544)(font "Arial" (color 0 0 0)))
+		(text "reset" (rect 51 83 132 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset_n" (rect 85 107 212 224)(font "Arial" (color 0 0 0)))
+		(text " system " (rect 237 288 522 586)(font "Arial" ))
+		(line (pt 80 32)(pt 160 32)(line_width 1))
+		(line (pt 160 32)(pt 160 288)(line_width 1))
+		(line (pt 80 288)(pt 160 288)(line_width 1))
+		(line (pt 80 32)(pt 80 288)(line_width 1))
+		(line (pt 81 52)(pt 81 76)(line_width 1))
+		(line (pt 82 52)(pt 82 76)(line_width 1))
+		(line (pt 159 52)(pt 159 76)(line_width 1))
+		(line (pt 158 52)(pt 158 76)(line_width 1))
+		(line (pt 159 92)(pt 159 116)(line_width 1))
+		(line (pt 158 92)(pt 158 116)(line_width 1))
+		(line (pt 159 132)(pt 159 156)(line_width 1))
+		(line (pt 158 132)(pt 158 156)(line_width 1))
+		(line (pt 159 172)(pt 159 196)(line_width 1))
+		(line (pt 158 172)(pt 158 196)(line_width 1))
+		(line (pt 159 212)(pt 159 236)(line_width 1))
+		(line (pt 158 212)(pt 158 236)(line_width 1))
+		(line (pt 159 252)(pt 159 276)(line_width 1))
+		(line (pt 158 252)(pt 158 276)(line_width 1))
+		(line (pt 81 92)(pt 81 116)(line_width 1))
+		(line (pt 82 92)(pt 82 116)(line_width 1))
+		(line (pt 0 0)(pt 272 0)(line_width 1))
+		(line (pt 272 0)(pt 272 304)(line_width 1))
+		(line (pt 0 304)(pt 272 304)(line_width 1))
+		(line (pt 0 0)(pt 0 304)(line_width 1))
+	)
+)

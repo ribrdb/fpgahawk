@@ -2,3 +2,11 @@
 svut_h.sv
 svut.out
 .DS_Store
+*.bak
+*.flock
+*.rpt
+*.smsg
+*.summary
+*.done
+db
+incremental_db

@@ -1,0 +1,15 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\intelFPGA_lite\projects\fpgahawk\quartus\de10nano\hawk_dsk\probes.qsys --synthesis=VERILOG --output-directory=C:\intelFPGA_lite\projects\fpgahawk\quartus\de10nano\hawk_dsk\probes\synthesis --family="Cyclone V" --part=5CSEBA6U23I7
+Progress: Loading hawk_dsk/probes.qsys
+Progress: Reading input file
+Progress: Adding in_system_sources_probes_0 [altera_in_system_sources_probes 17.0]
+Progress: Parameterizing module in_system_sources_probes_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: probes: Generating probes "probes" for QUARTUS_SYNTH
+Info: in_system_sources_probes_0: "probes" instantiated altera_in_system_sources_probes "in_system_sources_probes_0"
+Info: probes: Done "probes" with 2 modules, 2 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

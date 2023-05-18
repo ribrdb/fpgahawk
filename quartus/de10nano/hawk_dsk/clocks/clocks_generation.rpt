@@ -1,0 +1,24 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\intelFPGA_lite\projects\fpgahawk\quartus\de10nano\hawk_dsk\clocks.qsys --synthesis=VERILOG --output-directory=C:\intelFPGA_lite\projects\fpgahawk\quartus\de10nano\hawk_dsk\clocks\synthesis --family="Cyclone V" --part=5CSEBA6U23I7
+Progress: Loading hawk_dsk/clocks.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 17.0]
+Progress: Parameterizing module clk_0
+Progress: Adding pll_0 [altera_pll 17.0]
+Progress: Parameterizing module pll_0
+Progress: Adding pll_1 [altera_pll 17.0]
+Progress: Parameterizing module pll_1
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: clocks.pll_0: The legal reference clock frequency is 5.0 MHz..700.0 MHz
+Info: clocks.pll_0: Able to implement PLL with user settings
+Info: clocks.pll_1: The legal reference clock frequency is 5.0 MHz..700.0 MHz
+Info: clocks.pll_1: Able to implement PLL with user settings
+Info: clocks: Generating clocks "clocks" for QUARTUS_SYNTH
+Info: pll_0: "clocks" instantiated altera_pll "pll_0"
+Info: pll_1: "clocks" instantiated altera_pll "pll_1"
+Info: clocks: Done "clocks" with 3 modules, 5 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

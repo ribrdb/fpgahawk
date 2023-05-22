@@ -5,6 +5,8 @@ module FakeDSK (
     input wire [14:0] addr,
     input wire [1:0] cmd, // 1 = seek, 2 == read, 3 = write
     input wire [1:0] size, // 0 = sector, 1 = track, 2 = cylinder, 3 = whole disk,
+    input wire go,
+    output reg[3:0] debug_status,
 
     output reg hawk_cyl_strobe,
     output reg [8:0] hawk_cylad,
@@ -68,6 +70,7 @@ assign new_read_addr = new_read_addr1 ^ new_read_addr2;
 assign new_read_data = new_read_data1 ^ new_read_data2;
 assign addr_pat = cur_addr[14:8] ^ cur_addr[7:0];
 assign hawk_wr_en = (state == WRITE_GAP || state == WRITE);
+assign debug_status = state;
 
 always @(posedge clk) hawk_read_en <= (state == READ_ADDR || state == READ);
 
@@ -96,12 +99,15 @@ endcase
 always_comb begin
     case (state)
     IDLE: begin
-        case (cmd)
-            0: next_state = IDLE;
-            1: next_state = SEEK;
-            2: next_state = (req_cyladdr == hawk_cylad) ? SECTOR_WAIT : SEEK;
-            3: next_state = (req_cyladdr == hawk_cylad) ? WRITE_PREP : SEEK;
-        endcase
+        if (go)
+            case (cmd)
+                0: next_state = IDLE;
+                1: next_state = SEEK;
+                2: next_state = (req_cyladdr == hawk_cylad) ? SECTOR_WAIT : SEEK;
+                3: next_state = (req_cyladdr == hawk_cylad) ? WRITE_PREP : SEEK;
+            endcase
+        else
+            next_state = IDLE;
     end
     SEEK:
         if (hawk_ready)

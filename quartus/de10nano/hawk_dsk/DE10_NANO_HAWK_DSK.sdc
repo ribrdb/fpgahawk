@@ -54,9 +54,9 @@ derive_clock_uncertainty
 #**************************************************************
 # Set Clock Groups
 #**************************************************************
-set_clock_groups -asynchronous -group [get_clocks {qsys0|pll_0|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]
-set_clock_groups -asynchronous -group [get_clocks {qsys0|pll_0|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk}]
-set_clock_groups -asynchronous -group [get_clocks {qsys0|pll_0|altera_pll_i|general[2].gpll~PLL_OUTPUT_COUNTER|divclk}]
+set_clock_groups -asynchronous -group [get_clocks {qsys0|pll_0|altera_pll_i|general[*].gpll~PLL_OUTPUT_COUNTER|divclk}]
+#set_clock_groups -asynchronous -group [get_clocks {qsys0|pll_0|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk}]
+#set_clock_groups -asynchronous -group [get_clocks {qsys0|pll_0|altera_pll_i|general[2].gpll~PLL_OUTPUT_COUNTER|divclk}]
 set_clock_groups -asynchronous -group [get_clocks {qsys0|pll_1|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}]
 set_clock_groups -asynchronous -group [get_clocks {dsk_wr_data}]
 set_clock_groups -asynchronous -group [get_clocks {dsk_cyl_strobe}]

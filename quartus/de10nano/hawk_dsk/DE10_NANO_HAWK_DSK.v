@@ -59,13 +59,15 @@ wire [1:0] dsk_cmd;
 wire [1:0] dsk_cmd_size;
 wire [29:0] probes;
 wire [21:0] sources;
+wire dsk_go;
+wire [3:0] dsk_debug;
 
 //=======================================================
 //  Structural coding
 //=======================================================
 
-	assign probes = {cyl_strobe, cylad, hs, wr_en, read_en, on_cyl, interrupt, index, sector, seek_err, adint, fault, ready, wrstat, saddr, addr_ack, density};
-	assign {dsk_addr, dsk_cmd, dsk_cmd_size, rtzs, unit_select, reset} = sources;
+	assign probes = {dsk_debug, cyl_strobe, cylad, hs, wr_en, read_en, on_cyl, interrupt, index, sector, seek_err, adint, fault, ready, wrstat, saddr, addr_ack, density};
+	assign {dsk_go, dsk_addr, dsk_cmd, dsk_cmd_size, rtzs, unit_select, reset} = sources;
 
 	clocks qsys0 (
 		.clk_clk             (FPGA_CLK1_50),             //           clk.clk
@@ -123,6 +125,8 @@ wire [21:0] sources;
 		.addr(dsk_addr),
 		.cmd(dsk_cmd),
 		.size(dsk_cmd_size),
+		.go(dsk_go),
+		.debug_status(dsk_debug),
 		.hawk_cyl_strobe(cyl_strobe),
 		.hawk_cylad(cylad),
 		.hawk_hs(hs),
